@@ -9,11 +9,7 @@ try:
         days_year = 0
         if is_leap(year):
             days_of_month[1] = 29
-        else:
-            if (month == 2 and days_of_month[1] == 29) or (month == 2 and day >= 29):
-                # days_of_month[1] = 28
-                exit()
-        if month > 12 or month < 1 or day < 1 or day > 31 or day > days_of_month[month-1]:
+        if not is_valid_date(day ,month,year):
             exit()
         for i in range(month-1):
             days_year += days_of_month[i]
@@ -51,6 +47,16 @@ try:
             exit()
         else:
             return date_diff
+    
+    def is_valid_date(day, month, year):
+        if month < 1 or month > 12:
+            return False
+        days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        if is_leap(year):
+            days[1] = 29
+        if day < 1 or day > days[month - 1]:
+            return False
+        return True
     
     print(day_of_year(1, 12, 2025))
     print(date_diff("25-12-1999", "9-3-2000"))
