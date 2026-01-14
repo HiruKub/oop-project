@@ -20,7 +20,39 @@ try:
             # print(days_year)
         days_year+=day
         return days_year
-
+    
+    def day_in_year(year):
+        if is_leap(year):
+            return 366
+        else:
+            return 365
+    def date_diff(date_start,date_end):
+        day_start,month_start,year_start = [int(e) for e in (date_start.split('-'))]
+        day_end,month_end,year_end = [int(e) for e in (date_end.split('-'))]
+        # print("date_start")
+        # print(day_of_year(day_start,month_start,year_start))
+        # print("date_end")
+        # print(day_of_year(day_end,month_end,year_end))
+        # print(day_of_year(day_end - day_start , month_end-month_start,year_end - year_start))
+        date_diff = 0
+        # print("burrito")
+        # print(2 - abs(day_of_year(day_end,month_end,year_end) - day_of_year(day_start,month_start,year_start)))
+        # print(date_diff)
+        for i in range(year_start,year_end):
+            # print("sandwich")
+            date_diff+=day_in_year(i)
+            # print(date_diff)
+        date_diff -= day_of_year(day_start,month_start,year_start) - 1
+        # print(date_diff)
+        date_diff += day_of_year(day_end,month_end,year_end)
+        # print(date_diff)
+        # print(day_of_year(day_start,month_start,year_start))
+        if date_diff < 0:
+            exit()
+        else:
+            return date_diff
+    
     print(day_of_year(1, 12, 2025))
+    print(date_diff("25-12-1999", "9-3-2000"))
 except:
     print("Invalid")
